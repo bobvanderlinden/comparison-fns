@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "declaration": true,
+    "declarationDir": "dist/types",
+    "esModuleInterop": true,
+    "lib": ["ES2021"],
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "outDir": "dist/esm",
+    "target": "ES2021",
+    "noImplicitReturns": true,
+    "noUnusedLocals": true,
+    "strict": true
+  },
+  "tsc-alias": {
+    "resolveFullPaths": true,
+    "verbose": true
+  },
+  "include": ["src"],
+  "exclude": ["node_modules", "dist", "src/**/*.test.ts"]
+}
