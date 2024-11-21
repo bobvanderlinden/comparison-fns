@@ -195,7 +195,7 @@ export function chainComparers<T>(...comparers: Comparer<T>[]): Comparer<T> {
 /**
  * Compare strings based on a predefined order.
  */
-export function orderComparer<T extends Key>(ordering: T[]): Comparer<T> {
+export function orderComparer<T>(ordering: T[]): Comparer<T> {
   // Create a reverse lookup table for quickly finding the index of an item.
   const lookup = new Map(ordering.map((item, index) => [item, index]));
   function indexOf(item: T) {

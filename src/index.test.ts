@@ -120,15 +120,23 @@ describe("conditionTypeFirstComparer", () => {
 });
 
 describe("orderComparer", () => {
-  const order = ["a", "b", "c"];
+  const order = ["a", 1, "b", 2, "c"];
   const compare = orderComparer(order);
-  const orderedItems = ["a", "a", "b", "b", "c", "c", "d"];
+  const orderedItems = ["a", "a", 1, "b", "b", 2, "c", "c", "d"];
   it.each(rotatePermutations(orderedItems).map((items) => [items]))(
     "should sort correctly %",
     (unorderedItems) => {
       expect(unorderedItems.toSorted(compare)).toStrictEqual(orderedItems);
     }
   );
+
+  it("sorts different types of values", () => {
+    expect(
+      [1, null, undefined, "a"].toSorted(
+        orderComparer([null, "a", 1, undefined])
+      )
+    ).toStrictEqual([null, "a", 1, undefined]);
+  });
 });
 
 describe("mapComparer", () => {
