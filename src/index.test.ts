@@ -12,6 +12,7 @@ import {
   groupComparer,
   mapComparer,
   nullableFirstComparer,
+  nullableLastComparer,
   orderComparer,
 } from "./index";
 
@@ -79,6 +80,20 @@ describe("nullableFirstComparer", () => {
     [undefined, 1, -1],
     [1, undefined, 1],
     [1, 1, 0],
+    [null, undefined, 0],
+    [undefined, null, 0],
+  ])("(compareNumber)(%p, %p) -> %p", (a, b, expected) => {
+    expect(compare(a, b)).toBe(expected);
+  });
+});
+
+describe("nullableLastComparer", () => {
+  const compare = nullableLastComparer(compareNumber);
+  it.each([
+    [null, 1, 1],
+    [1, null, -1],
+    [undefined, 1, 1],
+    [1, undefined, -1],
     [null, undefined, 0],
     [undefined, null, 0],
   ])("(compareNumber)(%p, %p) -> %p", (a, b, expected) => {

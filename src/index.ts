@@ -19,6 +19,10 @@ function isNullable<T>(value: T | null | undefined): value is null | undefined {
   return value === null || value === undefined;
 }
 
+function isNonNullable<T>(value: T | null | undefined): value is T {
+  return value !== null && value !== undefined;
+}
+
 function isNumber(value: unknown): value is number {
   return typeof value === "number";
 }
@@ -94,6 +98,20 @@ export function nullableFirstComparer<T>(
     isNullable,
     compareEqual,
     comparer
+  );
+}
+
+/**
+ * Order null and undefined values last and use comparer for other cases.
+ * null and undefined are considered equal to eachother.
+ */
+export function nullableLastComparer<T>(
+  comparer: Comparer<T>
+): Comparer<T | null | undefined> {
+  return conditionTypeFirstComparer<T | null | undefined, T>(
+    isNonNullable,
+    comparer,
+    compareEqual
   );
 }
 
