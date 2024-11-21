@@ -198,7 +198,9 @@ export function invertComparer<T>(comparer: Comparer<T>): Comparer<T> {
  * Comparers are iterated through until a comparer indicates the values are non-equal.
  * If all comparers return values are equal, the items are considered equal.
  */
-export function chainComparers<T>(...comparers: Comparer<T>[]): Comparer<T> {
+export function chainComparers<T>(
+  ...comparers: readonly Comparer<T>[]
+): Comparer<T> {
   return (a, b) => {
     for (const comparer of comparers) {
       const result = comparer(a, b);
@@ -213,7 +215,7 @@ export function chainComparers<T>(...comparers: Comparer<T>[]): Comparer<T> {
 /**
  * Compare strings based on a predefined order.
  */
-export function orderComparer<T>(ordering: T[]): Comparer<T> {
+export function orderComparer<T>(ordering: readonly T[]): Comparer<T> {
   // Create a reverse lookup table for quickly finding the index of an item.
   const lookup = new Map(ordering.map((item, index) => [item, index]));
   function indexOf(item: T) {
