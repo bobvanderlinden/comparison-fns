@@ -266,6 +266,12 @@ export const compareNumberOrString = conditionTypeFirstComparer<
  * Compare strings using a natural order.
  * Numbers inside the string are compared as numbers.
  * Other parts are compared as strings.
+ * @example
+ * ```js
+ * const strings = ["a1", "a10", "a2", "a20"];
+ * strings.sort(compareStringNatural);
+ * // => ["a1", "a2", "a10", "a20"]
+ * ```
  */
 export const compareStringNatural = mapComparer(
   arrayComparer(compareNumberOrString),
