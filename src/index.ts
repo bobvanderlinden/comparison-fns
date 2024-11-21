@@ -240,6 +240,18 @@ export function groupComparer<TKey extends Key, TValue>(
  * When the first differing item is found, the comparison result is returned.
  * When the items in the overlapping part are equal, the shorter array is ordered before longer ones.
  * @param itemComparer The comparer to use for individual items.
+ * @example
+ * We can interpret versions as arrays of numbers to sort them.
+ *
+ * ```js
+ * const versions = ["1.2.3", "1.2", "1.2.1", "1"];
+ * const compare = mapCompare(
+ *   arrayComparer(compareNumber),
+ *   version => version.split('.').map(parseInt)
+ * );
+ * versions.sort(compare);
+ * // => ["1", "1.2", "1.2.1", "1.2.3"]
+ * ```
  */
 export function arrayComparer<T>(itemComparer: Comparer<T>): Comparer<T[]> {
   return (a, b) => {
