@@ -1,6 +1,6 @@
 {
   "name": "comparison-fns",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Composable comparison functions for sorting",
   "author": {
     "name": "Bob van der Linden",
