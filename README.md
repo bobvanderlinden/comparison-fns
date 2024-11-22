@@ -163,13 +163,13 @@ Order strings using the current locale.
 ["a", "b", "c"].sort(compareString); // ["a", "b", "c"]
 ```
 
-### localeComparer
+### collatorComparer
 
-Order strings using a specific locale.
+Order strings using a specific collator to control language-specific comparison rules.
 
 ```js
-["Z", "a", "z", "ä"].sort(localeComparer("de")); // ["a", "ä", "z", "Z"]
-["Z", "a", "z", "ä"].sort(localeComparer("sv")); // ["a", "z", "Z", "ä"]
+const collator = new Intl.Collator("de", { caseFirst: "upper" });
+["z", "a", "Z", "ä"].sort(collatorComparer(collator)); // ["a", "ä", "Z", "z"]
 ```
 
 ### compareDate
