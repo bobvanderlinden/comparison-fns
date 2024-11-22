@@ -253,6 +253,7 @@ export function compareString(a: string, b: string): CompareResult {
 
 /**
  * Order strings using a specific locale.
+ * @deprecated Use `collatorComparer` instead.
  * @example
  *
  * ```js
@@ -262,6 +263,19 @@ export function compareString(a: string, b: string): CompareResult {
  */
 export function localeComparer(locale: string): Comparer<string> {
   return (a, b) => sign(a.localeCompare(b, locale));
+}
+
+/**
+ * Order strings using a specific collator to control language-specific comparison rules.
+ * @example
+ *
+ * ```js
+ * const collator = new Intl.Collator('de', { caseFirst: 'upper' });
+ * ['z', 'a', 'Z', 'ä'].sort(collatorComparer(collator)); // ["a", "ä", "Z", "z"]
+ * ```
+ */
+export function collatorComparer(collator: Intl.Collator): Comparer<string> {
+  return (a, b) => sign(collator.compare(a, b));
 }
 
 /**
